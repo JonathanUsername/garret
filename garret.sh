@@ -33,7 +33,7 @@
 # Path to your code directory
 P="/home/jon/Code/"
 
-# Reset the autocomplete
+# Update the autocomplete when calling "garret" with no target
 IFS=$'\n'
 COMPLETES=$(ls -d "$P"*/ | rev | awk -F"/" '{ print $2 }' | rev)
 complete -W "$COMPLETES" garret
@@ -54,12 +54,13 @@ else
 	cd "$p"
 	pwd
 
-	# THE POWER!!!!!!!!!!!!!
+	# This can be replaced with "cat $GF | parallel -P 8 -n 1",
+	# which is neater, but you'll need to download GNU Parallel
 	cat $GF | xargs -P 8 -I HERE bash -c HERE &
 
 	trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
-	# Now wait
+	# Now wait, so that you can quit everything with a single Ctrl+C
 	while :			
 	do
 	    sleep 60	
