@@ -54,14 +54,14 @@ else
 	cd "$p"
 	pwd
 
-	cat $GF | xargs -n1 -P 8 -I HERE bash -c HERE &
+	# THE POWER!!!!!!!!!!!!!
+	cat $GF | xargs -P 8 -I HERE bash -c HERE &
 
 	trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
 	# Now wait
 	while :			
 	do
-		echo "sleeping now."
 	    sleep 60	
 	done
 fi
